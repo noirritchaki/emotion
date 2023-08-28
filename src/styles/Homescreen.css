@@ -71,6 +71,7 @@
   font-weight: 700;
   line-height: 150%;
   padding: 0px 0px 12px 0px;
+  max-width: 300px;
 }
 
 .prev-emotion-action {
@@ -86,7 +87,12 @@
   padding: 4px 10px;
   height: 26px;
   border-radius: 35px;
-  margin-right: 12px;
+  margin: 0px 12px 12px 0px;
+  max-width: 300px;
+}
+
+.emotion-names {
+  font-style: italic;
 }
 
 .prev-emotion-time {
@@ -94,7 +100,8 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;
-  padding: 20px 0px 0px 0px;
+  padding: 8px 0px 0px 0px;
+  max-width: 300px;
 }
 
 .card-title {

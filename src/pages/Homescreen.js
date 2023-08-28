@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Button";
 import "../styles/Homescreen.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -58,7 +59,8 @@ export function Homescreen({ onStart }) {
           prevEmotions?.reverse()?.map((e) => (
             <div className="prev-emotion">
               <p className="prev-emotion-emotion">
-                I'm feeling {e.emotion.join(" and ")}
+                I'm feeling{" "}
+                <span className="emotion-names">{e.emotion.join(" and ")}</span>
               </p>
               {e?.action?.map((a) => (
                 <p className="prev-emotion-action">{a}</p>
@@ -78,7 +80,7 @@ export function Homescreen({ onStart }) {
         <nav className="navbar">
           <a href="#" className="nav-link nav-link-active">
             <FontAwesomeIcon
-              style={{ width: "24px", height: "24px" }}
+              style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
               icon={faHouse}
             />
             <span className="nav-text">home</span>
@@ -86,7 +88,7 @@ export function Homescreen({ onStart }) {
 
           <a href="#" className="nav-link">
             <FontAwesomeIcon
-              style={{ width: "24px", height: "24px" }}
+              style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
               icon={faChartColumn}
             />
             <span className="nav-text">reports</span>
@@ -94,7 +96,7 @@ export function Homescreen({ onStart }) {
 
           <a href="#" className="nav-link">
             <FontAwesomeIcon
-              style={{ width: "24px", height: "24px" }}
+              style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
               icon={faCircleUser}
             />
             <span className="nav-text">profile</span>

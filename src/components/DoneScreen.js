@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Divider } from "@mui/material";
 import dayjs from "dayjs";
+import "../styles/DoneScreens.css";
 
 function DoneScreen({
   mood = ["neutral"],
@@ -28,22 +29,33 @@ function DoneScreen({
         textAlign={"center"}
         color={"white"}
       >
-        <h1>done!</h1>
-        <p style={{ color: "#585858", marginTop: "20px" }}>
-          you have added your emotion check-in
+        <h1 style={{ fontSize: "32px", fontWeight: "800" }}>great job!</h1>
+        <p
+          style={{
+            color: "#585858",
+            marginTop: "20px",
+            fontSize: "16px",
+            fontWeight: "400",
+            lineHeight: "150%",
+          }}
+        >
+          you've added your emotions
         </p>
       </Box>
       <Box
         color={"#585858"}
-        marginTop={4}
+        marginTop={"64px"}
         display={"flex"}
         alignItems={"center"}
         gap={"8px"}
+        fontSize={"16px"}
+        fontWeight={"600"}
+        lineHeight={"150%"}
       >
         <Divider
           sx={{ minWidth: "50px", backgroundColor: "#585858", height: "1px" }}
         />
-        {"Your Summary"}
+        {"your summary"}
         <Divider
           sx={{ minWidth: "50px", backgroundColor: "#585858", height: "1px" }}
         />
@@ -54,21 +66,42 @@ function DoneScreen({
         flexDirection={"column"}
         alignItems={"center"}
         textAlign={"center"}
-        marginTop={4}
+        marginTop={"40px"}
       >
-        <h2>{"you're feeling"}</h2>
-        <br />
-        <h2 style={{ color: "red" }}>{selectedOption.join(" ")}</h2>
+        <span>
+          <h2
+            style={{
+              fontSize: "24px",
+              fontWeight: "800",
+              paddingBottom: "4px",
+            }}
+          >
+            {"you're feeling"}
+          </h2>
+        </span>
+        <h2 style={{ color: "#70D481", fontSize: "24px", fontWeight: "800" }}>
+          {selectedOption.join(", ")}
+        </h2>
 
-        <p style={{ fontSize: "14px", marginTop: "24px" }}>{note}</p>
+        <p
+          style={{
+            fontSize: "14px",
+            marginTop: "24px",
+            fontWeight: "400",
+            lineHeight: "150%",
+            width: "250px",
+          }}
+        >
+          {note}
+        </p>
 
         <Box
           sx={{
-            marginTop: "24px",
+            marginTop: "16px",
             display: "inline-flex",
             flexWrap: "wrap",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
+            justifyContent: "center",
+            alignItems: "center",
             width: "100%",
             gap: "10px",
           }}
@@ -94,7 +127,7 @@ function DoneScreen({
             </p>
           ))}
         </Box>
-        <Box marginTop={6}>
+        <Box marginTop="24px">
           <p style={{ color: "#585858" }}>
             {dayjs().format("ddd DD MMM hh:mm a")}
           </p>
