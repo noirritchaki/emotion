@@ -1,0 +1,8 @@
+{
+  "appId": "com.emotions4.www",
+  "appName": "emotion",
+  "webDir": "emotionsub",
+  "server": {
+    "androidScheme": "https"
+  }
+}
