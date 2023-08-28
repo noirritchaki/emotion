@@ -2,7 +2,12 @@ import React from "react";
 import Button from "@mui/material/Button";
 import "../styles/Homescreen.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faHouse,
+  faChartColumn,
+  faCircleUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function Homescreen({ onStart }) {
   const currentTime = new Date();
@@ -72,17 +77,26 @@ export function Homescreen({ onStart }) {
       <div className="navigation-bar">
         <nav className="navbar">
           <a href="#" className="nav-link nav-link-active">
-            <FontAwesomeIcon icon={faEnvelope} />
+            <FontAwesomeIcon
+              style={{ width: "24px", height: "24px" }}
+              icon={faHouse}
+            />
             <span className="nav-text">home</span>
           </a>
 
           <a href="#" className="nav-link">
-            <FontAwesomeIcon icon={faEnvelope} />
+            <FontAwesomeIcon
+              style={{ width: "24px", height: "24px" }}
+              icon={faChartColumn}
+            />
             <span className="nav-text">reports</span>
           </a>
 
           <a href="#" className="nav-link">
-            <FontAwesomeIcon icon={faEnvelope} />
+            <FontAwesomeIcon
+              style={{ width: "24px", height: "24px" }}
+              icon={faCircleUser}
+            />
             <span className="nav-text">profile</span>
           </a>
         </nav>
