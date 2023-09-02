@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Divider } from "@mui/material";
 import dayjs from "dayjs";
 import "../styles/DoneScreens.css";
+import { colors, moreColors } from "../constants/colours.js";
 
 function DoneScreen({
   mood = ["neutral"],
@@ -9,6 +10,7 @@ function DoneScreen({
   selectedOption = ["Grateful"],
   note = "I'm grateful for my family",
   currentStep = 4,
+  option,
 }) {
   console.log(mood, selectedActions, selectedOption, note, currentStep);
   return (
@@ -79,7 +81,15 @@ function DoneScreen({
             {"you're feeling"}
           </h2>
         </span>
-        <h2 style={{ color: "#70D481", fontSize: "24px", fontWeight: "800" }}>
+        <h2
+          style={{
+            color: selectedOption.includes(option)
+              ? colors[selectedOption]
+              : "#595959",
+            fontSize: "24px",
+            fontWeight: "800",
+          }}
+        >
           {selectedOption.join(", ")}
         </h2>
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { colors, moreColors } from "../constants/colours.js";
 import Button from "@mui/material/Button";
 import "../styles/EmotionSteps.css";
 import { Layout } from "../components/Layout";
@@ -12,21 +12,29 @@ import Low from "../assets/low.json";
 import Neutral from "../assets/neutral.json";
 import Good from "../assets/good.json";
 import Down from "../assets/down.json";
-import GoodSelected from "../assets/good-selected.json";
-import FineSelected from "../assets/fine-selected.json";
-import DownSelected from "../assets/down-selected.json";
-import LowSelected from "../assets/low-selected.json";
-import NeutralSelected from "../assets/neutral-selected.json";
+import GoodSelected from "../assets/good-selected-new.json";
+import FineSelected from "../assets/fine-selected-new.json";
+import DownSelected from "../assets/down-selected-new.json";
+import LowSelected from "../assets/low-selected-new.json";
+import NeutralSelected from "../assets/neutral-selected-new.json";
 import dayjs from "dayjs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 //creating a function to store the step currently on and the emotion selected
 
-export function EmotionSteps({ steps, onComplete }) {
+export function EmotionSteps({
+  steps,
+  onComplete,
+  setStarted,
+  emotionDescription,
+}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [mood, setMood] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
   const [selectedActions, setSelectedActions] = useState([]);
   const [note, setNote] = useState("");
+  const [selectedEmotion, setSelectedEmotion] = useState([]);
 
   //function to store all the variables to localstorage
   //All emotions are stored in the following format
@@ -76,6 +84,14 @@ export function EmotionSteps({ steps, onComplete }) {
     }
   };
 
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    } else {
+      setStarted(false);
+    }
+  };
+
   // const handleToNext = () => {
   //   if (currentStep < steps.length - 1) {
   //     setCurrentStep(currentStep + 1);
@@ -89,12 +105,15 @@ export function EmotionSteps({ steps, onComplete }) {
   const handleWhenClicked = (option, enableMultiSelect, state, setState) => {
     if (!enableMultiSelect) {
       setState([option]);
+      setSelectedEmotion([option]);
       return;
     }
     if (state.includes(option)) {
       setState(state.filter((item) => item !== option)); //if option exists in state then we will remove it from the array
+      setSelectedEmotion(selectedEmotion.filter((item) => item !== option)); //this will remove it from the array
     } else {
       setState([...state, option]);
+      setSelectedEmotion([...selectedEmotion, option]);
     }
   };
 
@@ -143,6 +162,18 @@ export function EmotionSteps({ steps, onComplete }) {
               setSelectedOption
             )
           }
+          style={{
+            // color: selectedOption.includes(option)
+            //   ? moreColors[selectedOption]
+            //   : "#ffffff",
+            //forgot that if i needed it to select multiple options i need it to be an array
+            backgroundColor: selectedOption.includes(option)
+              ? moreColors[selectedOption[0]]
+              : "",
+            borderColor: selectedOption.includes(option)
+              ? moreColors[selectedOption[0]]
+              : "",
+          }}
         >
           <Typography variant={"body2"}>{option}</Typography>
         </div>
@@ -171,7 +202,7 @@ export function EmotionSteps({ steps, onComplete }) {
               style={{
                 minWidth: "100%",
                 minHeight: "100%",
-                opacity: "0.4",
+                opacity: mood.includes(option) ? 1 : "0.4",
               }}
               animationData={getAnimationData(option)}
               loop
@@ -180,7 +211,11 @@ export function EmotionSteps({ steps, onComplete }) {
           </Box>
           <Typography
             variant={"body2"}
-            sx={{ fontSize: "16px", fontWeight: "500" }}
+            sx={{
+              fontSize: "16px",
+              fontWeight: "500",
+              color: mood.includes(option) ? colors[mood] : "#595959",
+            }}
           >
             {option}
           </Typography>
@@ -260,8 +295,16 @@ export function EmotionSteps({ steps, onComplete }) {
       <Button className="next-cta" variant="contained" onClick={handleToNext}>
         next
       </Button> */}
-
+      {/* bookmark: Layout */}
       <Layout
+        navi={
+          <div className="back-button" onClick={handleBack}>
+            <FontAwesomeIcon
+              style={{ width: "20px", height: "20px" }}
+              icon={faArrowLeft}
+            />
+          </div>
+        }
         indicator={
           currentStep !== steps.length - 1 ? (
             `${currentStep + 1} / ${steps.length - 1}`
@@ -289,6 +332,13 @@ export function EmotionSteps({ steps, onComplete }) {
                     options={steps[currentStep].options}
                     enableMultiSelect={steps[currentStep]?.multiSelect}
                   />
+
+                  {/* {selectedEmotion && (
+                    <div className="emotion-description">
+                      <h3>Description</h3>
+                      <p>{emotionDescription[selectedEmotion]}</p>
+                    </div>
+                  )} */}
                 </div>
               )}
               {currentStep > 0 && (
@@ -298,8 +348,39 @@ export function EmotionSteps({ steps, onComplete }) {
                     enableMultiSelect={steps[currentStep]?.multiSelect}
                     currentStep={currentStep}
                   />
+                  {/* this is displaying the array of descriptions based on what was selected */}
+                  <div className="description-container">
+                    {selectedEmotion.map((emotion) => (
+                      <div className="emotion-description" key={emotion}>
+                        <Typography
+                          variant="h4"
+                          className="desc-title"
+                          sx={{
+                            fontSize: "14px",
+                            fontWeight: "600",
+                            paddingBottom: "4px",
+                          }}
+                        >
+                          {emotion}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          className="desc-paragraph"
+                          sx={{
+                            fontSize: "12px",
+                            fontWeight: "400",
+                            color: "#ffffff",
+                            paddingBottom: "14px",
+                          }}
+                        >
+                          {emotionDescription[emotion]}
+                        </Typography>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
+
               {/* {isSuccess && (
                 <div className="selected-options">
                   <Typography variant="h5">

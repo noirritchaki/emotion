@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+.back-button {
+  color: #ffffff;
+  padding: 0px 0px 56px 20px;
+}
+
 .step-indicator {
   color: #585858;
   font-size: 14px;
@@ -71,7 +76,7 @@
 }
 
 .emotion-options .selected {
-  background-color: #8ef09e;
+  /* background-color: #8ef09e; */
   color: #000;
 }
 
@@ -93,6 +98,18 @@
 #notes {
   color: #ffffff;
 }
+
+.description-container {
+  background-color: #1f1f1f;
+  margin: 56px 0px 20px 0px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* .emotion-description {
+  margin: 56px 20px 0px 20px;
+  background-color: #1f1f1f;
+} */
 
 /* h3 {
   color: #ffffff;
