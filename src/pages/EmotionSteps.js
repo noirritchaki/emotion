@@ -349,7 +349,7 @@ export function EmotionSteps({
                     currentStep={currentStep}
                   />
                   {/* this is displaying the array of descriptions based on what was selected */}
-                  <div className="description-container">
+                  {/* <div className="description-container">
                     {selectedEmotion.map((emotion) => (
                       <div className="emotion-description" key={emotion}>
                         <Typography
@@ -377,7 +377,40 @@ export function EmotionSteps({
                         </Typography>
                       </div>
                     ))}
-                  </div>
+                  </div> */}
+                </div>
+              )}
+
+              {currentStep === 1 && (
+                <div className="description-container">
+                  {selectedEmotion.map((emotion) => (
+                    <div className="emotion-description" key={emotion}>
+                      <Typography
+                        variant="h4"
+                        className="desc-title"
+                        sx={{
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          paddingBottom: "4px",
+                          color: "#ffffff",
+                        }}
+                      >
+                        {emotion}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        className="desc-paragraph"
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: "400",
+                          color: "#ffffff",
+                          paddingBottom: "14px",
+                        }}
+                      >
+                        {emotionDescription[emotion]}
+                      </Typography>
+                    </div>
+                  ))}
                 </div>
               )}
 
