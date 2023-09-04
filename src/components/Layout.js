@@ -30,7 +30,6 @@ export function Layout({ title, indicator, navi, body, footer }) {
             position: "fixed",
             bottom: "0px",
             margin: "20px 20px 48px 20px",
-            background: "green",
           }}
         >
           {footer.txt}
