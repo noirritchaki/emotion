@@ -3,6 +3,9 @@ import "./App.css";
 import { Homescreen } from "./pages/Homescreen";
 import { EmotionSteps } from "./pages/EmotionSteps";
 import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Reports } from "./pages/Reports";
+// import { Profile } from "./pages/Profile";
 
 function App() {
   // const [selectedEmotion, setSelectedEmotion] = useState("");

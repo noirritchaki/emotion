@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #121212;
+}
+
 .back-button {
   color: #ffffff;
   padding: 0px 0px 56px 20px;

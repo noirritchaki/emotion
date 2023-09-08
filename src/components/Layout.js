@@ -17,9 +17,15 @@ export function Layout({ title, indicator, navi, body, footer }) {
       <Box
         className={"cta-container"}
         sx={{
+          position: "fixed",
+          bottom: "0px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "transparent",
+          backdropFilter: "blur(8px)",
+          width: "100%",
+          padding: "10px",
         }}
       >
         <Button
@@ -27,9 +33,7 @@ export function Layout({ title, indicator, navi, body, footer }) {
           variant="contained"
           onClick={footer.onClick}
           sx={{
-            position: "fixed",
-            bottom: "0px",
-            margin: "20px 20px 48px 20px",
+            margin: "20px 20px 20px 20px",
           }}
         >
           {footer.txt}

@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Button";
 import "../styles/Homescreen.css";
+import { Route, Router, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -9,10 +10,15 @@ import {
   faChartColumn,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Switch } from "@mui/material";
 
 export function Homescreen({ onStart }) {
   const currentTime = new Date();
   const hour = currentTime.getHours();
+
+  const navigate = useNavigate();
+
+  const path = window.location.pathname;
 
   const today = new Date();
   const f = new Intl.DateTimeFormat("en-us", {
@@ -78,29 +84,33 @@ export function Homescreen({ onStart }) {
 
       <div className="navigation-bar">
         <nav className="navbar">
-          <a href="#" className="nav-link nav-link-active">
-            <FontAwesomeIcon
-              style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
-              icon={faHouse}
-            />
-            <span className="nav-text">home</span>
-          </a>
-
-          <a href="#" className="nav-link">
-            <FontAwesomeIcon
-              style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
-              icon={faChartColumn}
-            />
-            <span className="nav-text">reports</span>
-          </a>
-
-          <a href="#" className="nav-link">
-            <FontAwesomeIcon
-              style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
-              icon={faCircleUser}
-            />
-            <span className="nav-text">profile</span>
-          </a>
+          <div className={`nav-home ${path === "/" && "active"}`}>
+            <div className={`home-navi ${path === "/" && "active"}`}>
+              <FontAwesomeIcon
+                style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
+                icon={faHouse}
+                onClick={() => navigate("/")}
+              />
+              <span className="nav-text">home</span>
+            </div>
+            {console.log(path)}
+            <div className="report-navi">
+              <FontAwesomeIcon
+                style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
+                icon={faChartColumn}
+                onClick={() => navigate("/reports")}
+              />
+              <span className="nav-text">reports</span>
+            </div>
+            <div className="profile-navi">
+              <FontAwesomeIcon
+                style={{ width: "20px", height: "20px", paddingBottom: "2px" }}
+                icon={faCircleUser}
+                onClick={() => navigate("/profile")}
+              />
+              <span className="nav-text">profile</span>
+            </div>
+          </div>
         </nav>
       </div>
     </div>
