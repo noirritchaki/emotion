@@ -120,10 +120,11 @@
 }
 
 .navigation-bar {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .navbar {

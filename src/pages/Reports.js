@@ -1,6 +1,8 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import "../styles/Reports.css";
+import dayjs from "dayjs";
 import { Box, TextField, Typography } from "@mui/material";
 import { Route, Router, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,28 +18,79 @@ export function Reports() {
 
   const path = window.location.pathname;
 
+  const [groupedEmotions, setGroupedEmotions] = useState({});
+
+  useEffect(() => {
+    // bring previous emotions from local storage
+    const prevEmotions = JSON.parse(localStorage.getItem("emotions"));
+
+    if (prevEmotions) {
+      // grouping all emotions week-wise
+      const grouped = prevEmotions.reduce((weeklyEmotions, emotion) => {
+        const weekNumber = dayjs(emotion.time).isoWeek(); //making days in iso format
+
+        if (!weeklyEmotions[weekNumber]) {
+          weeklyEmotions[weekNumber] = [];
+        }
+
+        weeklyEmotions[weekNumber].push(emotion);
+
+        return weeklyEmotions;
+      }, {});
+
+      setGroupedEmotions(grouped);
+    }
+  }, []);
+
   return (
     <div className="report-page">
       <div className="title-container">
         <h1 className="header-text">your weekly reports</h1>
-        {/* <Typography
-          variant={"body2"}
-          className="sub-text"
-          sx={{
-            fontSize: "14px",
-            lineHeight: "150%",
-            fontWeight: "400",
-            textAlign: "left",
-            padding: "8px 20px 0px 20px",
-            minWidth: "90%",
-          }}
-        >
-          here you can view all your logged in emotions filtered weekly
-        </Typography> */}
 
         <p className="report-sub">
           here you can view all your logged in emotions filtered weekly
         </p>
+      </div>
+
+      <div className="card-content-1">
+        {Object.keys(groupedEmotions).length > 0 ? ( //checking if there are emotions in that week
+          Object.keys(groupedEmotions).map((weekNumber) => (
+            <div key={weekNumber}>
+              <h2 className="card-title">Week {weekNumber}</h2>
+              {groupedEmotions[weekNumber].map((e, index) => (
+                <div key={index} className="prev-emotion">
+                  <p className="prev-emotion-emotion">
+                    I'm feeling{" "}
+                    <span className="emotion-names">
+                      {e.emotion.join(" and ")}
+                    </span>
+                  </p>
+                  {prevEmotions ? (
+                    prevEmotions?.reverse()?.map((e) => (
+                      <div className="prev-emotion">
+                        <p className="prev-emotion-emotion">
+                          I'm feeling{" "}
+                          <span className="emotion-names">
+                            {e.emotion.join(" and ")}
+                          </span>
+                        </p>
+                        {e?.action?.map((a) => (
+                          <p className="prev-emotion-action">{a}</p>
+                        ))}
+                        <p className="prev-emotion-time">{e.time}</p>
+                        <hr className="solid" />
+                      </div>
+                    ))
+                  ) : (
+                    <h2 className="card-title">previous emotions</h2>
+                  )}
+                </div>
+              ))}
+            </div>
+          ))
+        ) : (
+          <h2 className="card-title">previous emotions</h2>
+        )}
       </div>
 
       <div className="navigation-bar">
