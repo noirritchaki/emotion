@@ -20,14 +20,20 @@ export function Reports() {
 
   const [groupedEmotions, setGroupedEmotions] = useState({});
 
+  const [prevEmotions, setPrevEmotions] = useState([]);
+
   useEffect(() => {
     // bring previous emotions from local storage
-    const prevEmotions = JSON.parse(localStorage.getItem("emotions"));
+    setPrevEmotions(JSON.parse(localStorage.getItem("emotions")));
 
     if (prevEmotions) {
       // grouping all emotions week-wise
-      const grouped = prevEmotions.reduce((weeklyEmotions, emotion) => {
+      const grouped = prevEmotions?.reduce((weeklyEmotions, emotion) => {
         const weekNumber = dayjs(emotion.time).isoWeek(); //making days in iso format
+
+        {
+          console.log("Prev Emotions", grouped, prevEmotions);
+        }
 
         if (!weeklyEmotions[weekNumber]) {
           weeklyEmotions[weekNumber] = [];
