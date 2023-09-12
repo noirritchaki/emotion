@@ -30,7 +30,7 @@ export function Reports() {
         </p>
       </div>
 
-      {/* <div className="card-content-1">
+      <div className="card-content-1">
         {prevEmotions ? (
           prevEmotions?.reverse()?.map((e) => (
             <div className="prev-emotion">
@@ -49,7 +49,7 @@ export function Reports() {
           <h2 className="card-title">previous emotions</h2>
         )}
         : (<h2 className="card-title">previous emotions</h2>)
-      </div> */}
+      </div>
 
       <div className="navigation-bar">
         <nav className="navbar">
