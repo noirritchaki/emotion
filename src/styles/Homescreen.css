@@ -56,6 +56,10 @@
   margin: 42px 20px 24px 20px;
 }
 
+.card-content-2 {
+  opacity: 0;
+}
+
 .card-content-1 .prev-card-title {
   font-size: 16px;
   color: #585858;

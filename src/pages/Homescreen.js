@@ -61,7 +61,7 @@ export function Homescreen({ onStart }) {
 
       {/* TODO: Add styling to show previous emotions */}
 
-      <div className="card-content-1">
+      <div className="card-content-2">
         {prevEmotions ? (
           prevEmotions?.reverse()?.map((e) => (
             <div className="prev-emotion">
