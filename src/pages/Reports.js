@@ -18,35 +18,7 @@ export function Reports() {
 
   const path = window.location.pathname;
 
-  const [groupedEmotions, setGroupedEmotions] = useState({});
-
-  const [prevEmotions, setPrevEmotions] = useState([]);
-
-  useEffect(() => {
-    // bring previous emotions from local storage
-    setPrevEmotions(JSON.parse(localStorage.getItem("emotions")));
-
-    if (prevEmotions) {
-      // grouping all emotions week-wise
-      const grouped = prevEmotions?.reduce((weeklyEmotions, emotion) => {
-        const weekNumber = dayjs(emotion.time).isoWeek(); //making days in iso format
-
-        {
-          console.log("Prev Emotions", grouped, prevEmotions);
-        }
-
-        if (!weeklyEmotions[weekNumber]) {
-          weeklyEmotions[weekNumber] = [];
-        }
-
-        weeklyEmotions[weekNumber].push(emotion);
-
-        return weeklyEmotions;
-      }, {});
-
-      setGroupedEmotions(grouped);
-    }
-  }, []);
+  const prevEmotions = JSON.parse(localStorage.getItem("emotions"));
 
   return (
     <div className="report-page">
@@ -58,46 +30,26 @@ export function Reports() {
         </p>
       </div>
 
-      <div className="card-content-1">
-        {Object.keys(groupedEmotions).length > 0 ? ( //checking if there are emotions in that week
-          Object.keys(groupedEmotions).map((weekNumber) => (
-            <div key={weekNumber}>
-              <h2 className="card-title">Week {weekNumber}</h2>
-              {groupedEmotions[weekNumber].map((e, index) => (
-                <div key={index} className="prev-emotion">
-                  <p className="prev-emotion-emotion">
-                    I'm feeling{" "}
-                    <span className="emotion-names">
-                      {e.emotion.join(" and ")}
-                    </span>
-                  </p>
-                  {prevEmotions ? (
-                    prevEmotions?.reverse()?.map((e) => (
-                      <div className="prev-emotion">
-                        <p className="prev-emotion-emotion">
-                          I'm feeling{" "}
-                          <span className="emotion-names">
-                            {e.emotion.join(" and ")}
-                          </span>
-                        </p>
-                        {e?.action?.map((a) => (
-                          <p className="prev-emotion-action">{a}</p>
-                        ))}
-                        <p className="prev-emotion-time">{e.time}</p>
-                        <hr className="solid" />
-                      </div>
-                    ))
-                  ) : (
-                    <h2 className="card-title">previous emotions</h2>
-                  )}
-                </div>
+      {/* <div className="card-content-1">
+        {prevEmotions ? (
+          prevEmotions?.reverse()?.map((e) => (
+            <div className="prev-emotion">
+              <p className="prev-emotion-emotion">
+                I'm feeling{" "}
+                <span className="emotion-names">{e.emotion.join(" and ")}</span>
+              </p>
+              {e?.action?.map((a) => (
+                <p className="prev-emotion-action">{a}</p>
               ))}
+              <p className="prev-emotion-time">{e.time}</p>
+              <hr className="solid" />
             </div>
           ))
         ) : (
           <h2 className="card-title">previous emotions</h2>
         )}
-      </div>
+        : (<h2 className="card-title">previous emotions</h2>)
+      </div> */}
 
       <div className="navigation-bar">
         <nav className="navbar">

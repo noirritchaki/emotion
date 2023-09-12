@@ -37,6 +37,10 @@ export function Homescreen({ onStart }) {
 
   const prevEmotions = JSON.parse(localStorage.getItem("emotions"));
 
+  {
+    console.log(prevEmotions);
+  }
+
   return (
     <div className="homescreen-app">
       <h1 className="greeting-title">{greet}</h1>
@@ -56,6 +60,27 @@ export function Homescreen({ onStart }) {
       </div>
 
       {/* TODO: Add styling to show previous emotions */}
+
+      <div className="card-content-1">
+        {prevEmotions ? (
+          prevEmotions?.reverse()?.map((e) => (
+            <div className="prev-emotion">
+              <p className="prev-emotion-emotion">
+                I'm feeling{" "}
+                <span className="emotion-names">{e.emotion.join(" and ")}</span>
+              </p>
+              {e?.action?.map((a) => (
+                <p className="prev-emotion-action">{a}</p>
+              ))}
+              <p className="prev-emotion-time">{e.time}</p>
+              <hr className="solid" />
+            </div>
+          ))
+        ) : (
+          <h2 className="card-title">previous emotions</h2>
+        )}
+        : (<h2 className="card-title">previous emotions</h2>)
+      </div>
 
       <div className="navigation-bar">
         <nav className="navbar">
